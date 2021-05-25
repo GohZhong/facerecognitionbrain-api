@@ -26,23 +26,21 @@ app.use(express.json())
 app.use(cors())
 
 app.get('/',(req, res)=> {
-  db.select('*').from('users')
-  .then(users => res.json("Server is working!!",users))
-  .catch((err)=>res.status(400).json("Server is not working ", err))
+  res.json('Server is working')
 })
 
-app.post('/signin', (req, res)=> {signin.handleSignIn(req, res, db, bcrypt)});
+// app.post('/signin', (req, res)=> {signin.handleSignIn(req, res, db, bcrypt)});
 
-app.post('/register', (req, res) => {register.handleRegister(req, res, db, bcrypt)});
-//dependencies injection
+// app.post('/register', (req, res) => {register.handleRegister(req, res, db, bcrypt)});
+// //dependencies injection
 
-app.get('/profile/:id', (req, res)=> {profile.handleProfile(req, res, db)});
+// app.get('/profile/:id', (req, res)=> {profile.handleProfile(req, res, db)});
 
-app.put('/image', (req, res) => {image.handleImage(req, res, db)});
+// app.put('/image', (req, res) => {image.handleImage(req, res, db)});
 
-app.post('/imageurl', (req, res) => {image.handleApiCall(req, res)});
+// app.post('/imageurl', (req, res) => {image.handleApiCall(req, res)});
 
-app.get('/score', (req, res)=> {score.handleScore(req, res, db)});
+// app.get('/score', (req, res)=> {score.handleScore(req, res, db)});
 
 app.listen(process.env.PORT || 3000, () => console.log(`Server is running on port ${process.env.PORT}`))
 
