@@ -10,14 +10,15 @@ const image = require('./controllers/image.js');
 const score = require('./controllers/score.js');
 
 const db = knex({
-    client: 'pg',
-    connection: {
-      host : 'postgresql-shaped-98723',
-      user : 'postgres',
-      password : 'sudo',
-      database : 'smartbrain'
-    }
-  });
+  client: 'pg',
+  connection: {
+    host : process.env.DATABASE_URL,
+    ssl: true,
+    // user : 'postgres',
+    // password : 'sudo',
+    // database : 'smartbrain'
+  }
+});
 
 const app = express();
 
