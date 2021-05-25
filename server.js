@@ -9,13 +9,14 @@ const profile = require('./controllers/profile.js');
 const image = require('./controllers/image.js');
 const score = require('./controllers/score.js');
 
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
-
 const db = knex({
   client: 'pg',
   connection: { 
     connectionString : process.env.DATABASE_URL,
-    ssl: true,
+    ssl: {
+      rejectUnauthorized: false,
+    },
+    // ssl: true,
     // user : 'postgres',
     // password : 'sudo',
     // database : 'smartbrain'
@@ -29,10 +30,11 @@ app.use(express.json())
 app.use(cors())
 
 app.get('/',(req, res)=> {
-  db.select('*').from('users')
-  .then(data=> {
-    res.json('Server is working', data)
-  })
+  // db.select('*').from('users')
+  // .then(data=> {
+  //   res.json('Server is working', data)
+  // })
+  res.json('Server is working');
 })
 
 app.post('/signin', (req, res)=> {signin.handleSignIn(req, res, db, bcrypt)});
