@@ -12,7 +12,7 @@ const score = require('./controllers/score.js');
 const db = knex({
     client: 'pg',
     connection: {
-      host : '127.0.0.1',
+      host : 'postgresql-shaped-98723',
       user : 'postgres',
       password : 'sudo',
       database : 'smartbrain'
