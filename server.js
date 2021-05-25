@@ -1,5 +1,7 @@
 const express = require('express');
+// const bcrypt = require('bcrypt-node');
 const bcrypt = require('bcrypt-nodejs');
+
 const cors = require('cors');
 const knex = require('knex');
 
@@ -23,6 +25,16 @@ const db = knex({
   }
 });
 
+// const db = knex({
+//   client: 'pg',
+//   connection: {
+//     host : '127.0.0.1',
+//     user : 'postgres',
+//     password : 'sudo',
+//     database : 'smartbrain'
+//   }
+// });
+
 const app = express();
 
 app.use(express.urlencoded({extended: false}));
@@ -30,11 +42,12 @@ app.use(express.json())
 app.use(cors())
 
 app.get('/',(req, res)=> {
-  // db.select('*').from('users')
-  // .then(data=> {
-  //   res.json('Server is working', data)
-  // })
-  res.json('Server is working');
+  db.select('*').from('users')
+  .then(data=> {
+    res.json(data)
+  })
+  .catch(()=>'unable to fetch database')
+  // res.json('Server is working');
 })
 
 app.post('/signin', (req, res)=> {signin.handleSignIn(req, res, db, bcrypt)});
@@ -50,6 +63,7 @@ app.post('/imageurl', (req, res) => {image.handleApiCall(req, res)});
 
 app.get('/score', (req, res)=> {score.handleScore(req, res, db)});
 
+// app.listen(3000, () => console.log(`Server is running on port 3000`))
 app.listen(process.env.PORT || 3000, () => console.log(`Server is running on port ${process.env.PORT}`))
 
 
