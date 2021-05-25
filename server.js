@@ -1,5 +1,5 @@
 const express = require('express');
-const bcrypt = require('bcrypt-node')
+const bcrypt = require('bcrypt-node');
 const cors = require('cors');
 const knex = require('knex');
 
