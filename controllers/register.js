@@ -1,6 +1,6 @@
 const handleRegister = (req, res, db, bcrypt)=>{
   const { name, email, password, colour } = req.body;
-  if(email && password && colour) {
+  if(email && password) {
     bcrypt.hash(password, null, null, function(err, hash) {
       db.transaction(trx => {
         trx.insert({
