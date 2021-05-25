@@ -9,15 +9,15 @@ const profile = require('./controllers/profile.js');
 const image = require('./controllers/image.js');
 const score = require('./controllers/score.js');
 
-// const db = knex({
-//     client: 'pg',
-//     connection: {
-//       host : '127.0.0.1',
-//       user : 'postgres',
-//       password : 'sudo',
-//       database : 'smartbrain'
-//     }
-//   });
+const db = knex({
+    client: 'pg',
+    connection: {
+      host : '127.0.0.1',
+      user : 'postgres',
+      password : 'sudo',
+      database : 'smartbrain'
+    }
+  });
 
 const app = express();
 
@@ -29,18 +29,18 @@ app.get('/',(req, res)=> {
   res.json('Server is working')
 })
 
-// app.post('/signin', (req, res)=> {signin.handleSignIn(req, res, db, bcrypt)});
+app.post('/signin', (req, res)=> {signin.handleSignIn(req, res, db, bcrypt)});
 
-// app.post('/register', (req, res) => {register.handleRegister(req, res, db, bcrypt)});
-// //dependencies injection
+app.post('/register', (req, res) => {register.handleRegister(req, res, db, bcrypt)});
+//dependencies injection
 
-// app.get('/profile/:id', (req, res)=> {profile.handleProfile(req, res, db)});
+app.get('/profile/:id', (req, res)=> {profile.handleProfile(req, res, db)});
 
-// app.put('/image', (req, res) => {image.handleImage(req, res, db)});
+app.put('/image', (req, res) => {image.handleImage(req, res, db)});
 
-// app.post('/imageurl', (req, res) => {image.handleApiCall(req, res)});
+app.post('/imageurl', (req, res) => {image.handleApiCall(req, res)});
 
-// app.get('/score', (req, res)=> {score.handleScore(req, res, db)});
+app.get('/score', (req, res)=> {score.handleScore(req, res, db)});
 
 app.listen(process.env.PORT || 3000, () => console.log(`Server is running on port ${process.env.PORT}`))
 
