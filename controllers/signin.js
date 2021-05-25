@@ -12,11 +12,10 @@ const handleSignIn = (req,res, db, bcrypt) => {
         } else {
           res.json(false);
         }
-      });
+      })
+      .catch(()=>res.json("Error comparing passwords"))
     })
-    .catch(() => {
-      res.json(false);
-    })
+    .catch(() =>res.json(false))
 }
 
 module.exports = {

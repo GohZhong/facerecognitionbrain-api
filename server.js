@@ -28,6 +28,7 @@ app.use(cors())
 app.get('/',(req, res)=> {
   db.select('*').from('users')
   .then(users => res.json("Server is working!!",users))
+  .catch((err)=>res.status(400).json("Server is not working ", err))
 })
 
 app.post('/signin', (req, res)=> {signin.handleSignIn(req, res, db, bcrypt)});

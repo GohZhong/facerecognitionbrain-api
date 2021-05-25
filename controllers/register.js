@@ -21,12 +21,14 @@ const handleRegister = (req, res, db, bcrypt)=>{
           .then(user => {
             res.json(user[0]);
           })
+          .catch((err)=>res.status(400).json('Error appending database', err))
         })
         .then(trx.commit)
         .catch(trx.rollback)
       })
       .catch(()=>res.status(400).json(false))
-    });
+    })
+    .catch(()=>res.status(400).json('Error hashing password'))
   } else {
     return res.json(false)
   }

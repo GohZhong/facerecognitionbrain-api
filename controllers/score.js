@@ -6,6 +6,7 @@ const handleScore = (req, res, db)=> {
     .then(score=> {
       res.json(score);
     })
+    .catch(()=>res.json('Error fetching score'))
 }
 
 module.exports = {

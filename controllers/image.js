@@ -11,17 +11,17 @@ const handleApiCall = (req, res) => {
 }
 
 const handleImage = (req,res, db)=> {
-    const { id,counter } = req.body;
-    db('users').where({id})
-    .increment('entries', counter)
-    .returning('entries')
-    .then(entry=>{
-      res.json(entry);
-    })
-    .catch(err => res.status(400).json('Unable to get entries ',err))
+  const { id,counter } = req.body;
+  db('users').where({id})
+  .increment('entries', counter)
+  .returning('entries')
+  .then(entry=>{
+    res.json(entry);
+  })
+  .catch(err => res.status(400).json('Unable to get entries ',err))
 }
 
 module.exports={
-    handleImage: handleImage,
-    handleApiCall: handleApiCall
+  handleImage: handleImage,
+  handleApiCall: handleApiCall
 }
